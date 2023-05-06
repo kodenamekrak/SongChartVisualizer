@@ -16,6 +16,7 @@ DECLARE_CLASS_CODEGEN(SongChartVisualizer, WindowGraph, UnityEngine::MonoBehavio
 
     public:
         void ShowGraph(std::vector<float> valueList, UnityEngine::Color linkColor);
+        void CreateNpsLines(std::pair<float, float> maxPoints, std::pair<float, float> minPoints);
         std::vector<UnityEngine::GameObject*> linkPositions;
         std::vector<UnityEngine::GameObject*> dotObjects;
 )

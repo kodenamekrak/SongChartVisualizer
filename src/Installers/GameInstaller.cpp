@@ -12,22 +12,20 @@
 
 DEFINE_TYPE(SongChartVisualizer::Installers, GameInstaller);
 
-namespace SongChartVisualizer::Installers {
+namespace SongChartVisualizer::Installers
+{
 
-    void GameInstaller::ctor(GlobalNamespace::GameplayCoreSceneSetupData* gameplayCoreSceneSetupData)
+    void GameInstaller::ctor(GlobalNamespace::GameplayCoreSceneSetupData *gameplayCoreSceneSetupData)
     {
         _gameplayCoreSceneSetupData = gameplayCoreSceneSetupData;
     }
 
     void GameInstaller::InstallBindings()
     {
-        if(!getModConfig().showGraph.GetValue()
-            || _gameplayCoreSceneSetupData->playerSpecificSettings->noTextsAndHuds
-            || _gameplayCoreSceneSetupData->gameplayModifiers->zenMode
-            || !_gameplayCoreSceneSetupData->transformedBeatmapData)
-                return;
-            
+        if (!getModConfig().showGraph.GetValue() || _gameplayCoreSceneSetupData->playerSpecificSettings->noTextsAndHuds || _gameplayCoreSceneSetupData->gameplayModifiers->zenMode || !_gameplayCoreSceneSetupData->transformedBeatmapData)
+            return;
+
         auto container = get_Container();
-        container->BindInterfacesAndSelfTo<ChartView*>()->AsSingle();
+        container->BindInterfacesAndSelfTo<ChartView *>()->AsSingle();
     }
 }

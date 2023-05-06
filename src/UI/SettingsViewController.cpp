@@ -9,11 +9,12 @@
 
 DEFINE_TYPE(SongChartVisualizer, SettingsViewController);
 
-namespace SongChartVisualizer {
+namespace SongChartVisualizer
+{
 
     void SettingsViewController::DidActivate(bool firstActivation, bool addedToHierarchy, bool screenSystemEnabling)
     {
-        if(!firstActivation)
+        if (!firstActivation)
             return;
 
         BSML::parse_and_construct(IncludedAssets::SettingsView_bsml, get_transform(), this);
@@ -22,13 +23,12 @@ namespace SongChartVisualizer {
             standardPosXIncrement, standardPosYIncrement, standardPosZIncrement,
             standardRotXIncrement, standardRotYIncrement, standardRotZIncrement,
             nonStandardPosXIncrement, nonStandardPosYIncrement, nonStandardPosZIncrement,
-            nonStandardRotXIncrement, nonStandardRotYIncrement, nonStandardRotZIncrement
-        };
+            nonStandardRotXIncrement, nonStandardRotYIncrement, nonStandardRotZIncrement};
 
-        for(int i = 0; i < incrementSettings.size(); i++)
+        for (int i = 0; i < incrementSettings.size(); i++)
         {
             auto inc = incrementSettings.at(i);
-            auto rect = inc->get_gameObject()->get_transform()->Find("ValuePicker")->GetComponent<UnityEngine::RectTransform*>();
+            auto rect = inc->get_gameObject()->get_transform()->Find("ValuePicker")->GetComponent<UnityEngine::RectTransform *>();
             rect->set_sizeDelta(UnityEngine::Vector2(25, rect->get_sizeDelta().y));
         }
     }

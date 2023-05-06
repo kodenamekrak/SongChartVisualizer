@@ -7,6 +7,8 @@
 #include "UnityEngine/RectTransform.hpp"
 #include "UnityEngine/GameObject.hpp"
 
+#include "bsml/shared/Helpers/creation.hpp"
+
 DEFINE_TYPE(SongChartVisualizer, WindowGraph);
 
 using namespace UnityEngine;
@@ -61,6 +63,12 @@ namespace SongChartVisualizer
 
 			lastCircleGameObject = circleGameObject;
 		}
+
+		auto maxNps = *std::max_element(valueList.begin(), valueList.end());
+		auto minNps = *std::min_element(valueList.begin(), valueList.end());
+		auto maxPoint = (maxNps - yMinimum) / (yMaximum - yMinimum) * height;
+		auto minPoint = (minNps - yMinimum) / (yMaximum - yMinimum) * height;
+		CreateNpsLines(std::make_pair(maxNps, maxPoint), std::make_pair(minNps, minPoint));
 	}
 
 	GameObject *WindowGraph::CreateDotConnection(Vector2 dotPositionA, Vector2 dotPositionB, Color linkColor)
@@ -83,6 +91,41 @@ namespace SongChartVisualizer
 		rect->set_localEulerAngles(Vector3(0, 0, atan2(dir.y, dir.x) * 57.29578f));
 
 		return go;
+	}
+
+	void WindowGraph::CreateNpsLines(std::pair<float, float> maxPoints, std::pair<float, float> minPoints)
+	{
+		float npsDifference = maxPoints.first - minPoints.first;
+		float posDifference = maxPoints.second - minPoints.second;
+		float oneNpsGraphLength = posDifference / npsDifference;
+		int npsIncrement = (int)(npsDifference / 10.0f) + 1;
+		float zeroNpsPoint = minPoints.second - (minPoints.first * oneNpsGraphLength);
+
+		int currentNps = -npsIncrement;
+
+		while(currentNps < maxPoints.first){
+			currentNps += npsIncrement;
+			GameObject *go = GameObject::New_ctor("NpsLine");
+			go->get_transform()->SetParent(_canvas->get_transform(), false);
+
+			auto image = go->AddComponent<HMUI::ImageView *>();
+			image->set_color(UnityEngine::Color::get_gray());
+			image->set_material(get_noGlowMaterial());
+
+			auto currentPosition = zeroNpsPoint + ((float)currentNps * oneNpsGraphLength);
+
+			auto npsText = BSML::Helpers::CreateText<TMPro::TextMeshProUGUI*>(go->get_transform(), std::to_string(currentNps), {-50, 0}, {1, 1});
+			npsText->set_fontSize(3);
+			npsText->set_color(Color::get_gray());
+			npsText->set_alignment(TMPro::TextAlignmentOptions::Center);
+
+			auto rect = go->GetComponent<RectTransform *>();
+			rect->set_anchorMin(Vector2(0, 0));
+			rect->set_anchorMax(Vector2(0, 0));
+			rect->set_sizeDelta(Vector2(105, 0.2f));
+			rect->set_anchoredPosition(Vector2(52.5, currentPosition));
+			rect->set_localEulerAngles(Vector3(0, 0, 0));
+		}
 	}
 
 	GameObject *WindowGraph::CreateCircle(Vector2 anchoredPosition, bool makeDotsVisible)

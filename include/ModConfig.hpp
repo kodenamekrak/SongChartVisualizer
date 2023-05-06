@@ -5,6 +5,7 @@
 DECLARE_CONFIG(ModConfig,
     CONFIG_VALUE(showGraph, bool, "Enabled", true);
     CONFIG_VALUE(peakWarning, bool, "PeakWarning", true);
+    CONFIG_VALUE(showNpsLines, bool, "ShowNpsLines", false);
 
     CONFIG_VALUE(standardLevelPosition, UnityEngine::Vector3, "ChartStandardLevelPosition", UnityEngine::Vector3(0, -0.4f, 2.25f));
     CONFIG_VALUE(standardLevelRotation, UnityEngine::Vector3, "ChartStandardLevelRotation", UnityEngine::Vector3(35, 0, 0));

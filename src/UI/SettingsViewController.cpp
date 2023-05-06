@@ -42,6 +42,7 @@ namespace SongChartVisualizer
     DEFINE_BSML_PROPERTY(bool, peakWarning);
     DEFINE_BSML_PROPERTY(bool, showBackground);
     DEFINE_BSML_PROPERTY(float, backgroundOpacity);
+    DEFINE_BSML_PROPERTY(bool, showNpsLines);
 
     DEFINE_BSML_PROPERTY(UnityEngine::Color, backgroundColor);
     DEFINE_BSML_PROPERTY(UnityEngine::Color, lineColor);

@@ -72,6 +72,7 @@
 	<bool-setting text='Show peak difficulty warning' value='peakWarning'
 				  hover-hint="Shows the warning text in-game when you're about to reach the peak difficulty of the song." apply-on-change="true"/>
 	<bool-setting text="Chart has a background color" value="showBackground" apply-on-change="true"/>
+	<bool-setting text="Chart has NPS lines" value="showNpsLines" apply-on-change="true"/>
 	<slider-setting text="Background opacity" hover-hint="How opaque should the background be? Setting it to 0 will make it fully clear."
 					min="0.0" max="1.0" increment="0.05" value="backgroundOpacity" formatter="background-opacity-formatter" apply-on-change="true"/>
 	<color-setting text="The color of the background" value="backgroundColor" apply-on-change="true"/>

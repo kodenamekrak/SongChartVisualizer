@@ -23,6 +23,7 @@ DECLARE_CLASS_CODEGEN(SongChartVisualizer, SettingsViewController, HMUI::ViewCon
     DECLARE_BSML_PROPERTY(bool, peakWarning);
     DECLARE_BSML_PROPERTY(bool, showBackground);
     DECLARE_BSML_PROPERTY(float, backgroundOpacity);
+    DECLARE_BSML_PROPERTY(bool, showNpsLines);
 
     DECLARE_BSML_PROPERTY(UnityEngine::Color, backgroundColor);
     DECLARE_BSML_PROPERTY(UnityEngine::Color, lineColor);

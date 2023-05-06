@@ -29,8 +29,6 @@ DEFINE_TYPE(SongChartVisualizer, ChartView);
 using namespace UnityEngine;
 using namespace GlobalNamespace;
 
-const UnityEngine::Vector2 chartSize = UnityEngine::Vector2(105, 65);
-
 namespace SongChartVisualizer
 {
 
@@ -48,6 +46,7 @@ namespace SongChartVisualizer
         bool is360Level = _beatmapData->get_spawnRotationEventsCount() > 0;
         Vector3 pos = is360Level ? getModConfig().nonStandardLevelPosition.GetValue() : getModConfig().standardLevelPosition.GetValue();
         Quaternion rot = Quaternion::Euler(is360Level ? getModConfig().nonStandardLevelRotation.GetValue() : getModConfig().standardLevelRotation.GetValue());
+        auto chartSize = UnityEngine::Vector2(getModConfig().showNpsLines.GetValue() ? 108 : 105, 65);
         _floatingScreen = BSML::FloatingScreen::CreateFloatingScreen(chartSize, false, pos, rot, 0, getModConfig().showBackground.GetValue());
 
         if (getModConfig().showBackground.GetValue())

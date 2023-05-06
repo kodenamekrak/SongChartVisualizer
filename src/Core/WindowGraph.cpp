@@ -9,6 +9,8 @@
 
 #include "bsml/shared/Helpers/creation.hpp"
 
+#include "ModConfig.hpp"
+
 DEFINE_TYPE(SongChartVisualizer, WindowGraph);
 
 using namespace UnityEngine;
@@ -49,7 +51,7 @@ namespace SongChartVisualizer
 		GameObject *lastCircleGameObject = nullptr;
 		for (int i = 0; i < valueList.size(); i++)
 		{
-			auto xPosition = xSize + i * xSize;
+			auto xPosition = xSize + i * xSize + (getModConfig().showNpsLines.GetValue() ? 3 : 0);
 			auto yPosition = (valueList[i] - yMinimum) / (yMaximum - yMinimum) * height;
 			auto circleGameObject = CreateCircle(Vector2(xPosition, yPosition), false);
 			dotObjects.push_back(circleGameObject);
@@ -64,6 +66,7 @@ namespace SongChartVisualizer
 			lastCircleGameObject = circleGameObject;
 		}
 
+		if (!getModConfig().showNpsLines.GetValue()) return;
 		auto maxNps = *std::max_element(valueList.begin(), valueList.end());
 		auto minNps = *std::min_element(valueList.begin(), valueList.end());
 		auto maxPoint = (maxNps - yMinimum) / (yMaximum - yMinimum) * height;
@@ -114,7 +117,7 @@ namespace SongChartVisualizer
 
 			auto currentPosition = zeroNpsPoint + ((float)currentNps * oneNpsGraphLength);
 
-			auto npsText = BSML::Helpers::CreateText<TMPro::TextMeshProUGUI*>(go->get_transform(), std::to_string(currentNps), {-50, 0}, {1, 1});
+			auto npsText = BSML::Helpers::CreateText<TMPro::TextMeshProUGUI*>(go->get_transform(), std::to_string(currentNps), {-54, 0}, {1, 1});
 			npsText->set_fontSize(3);
 			npsText->set_color(Color::get_gray());
 			npsText->set_alignment(TMPro::TextAlignmentOptions::Center);
@@ -123,7 +126,7 @@ namespace SongChartVisualizer
 			rect->set_anchorMin(Vector2(0, 0));
 			rect->set_anchorMax(Vector2(0, 0));
 			rect->set_sizeDelta(Vector2(105, 0.2f));
-			rect->set_anchoredPosition(Vector2(52.5, currentPosition));
+			rect->set_anchoredPosition(Vector2(55.5, currentPosition));
 			rect->set_localEulerAngles(Vector3(0, 0, 0));
 		}
 	}

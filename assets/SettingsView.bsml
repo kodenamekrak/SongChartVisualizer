@@ -1,0 +1,80 @@
+<scrollable-settings-container xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+							   xsi:noNamespaceSchemaLocation='https://raw.githubusercontent.com/RedBrumbler/Quest-BSML-Docs/gh-pages/schema.xsd'>
+	<bool-setting text='Enabled' value="showGraph" apply-on-change='true'/>
+	<horizontal pref-width='90'>
+		<text text='Standard panel position:' font-size='5'/>
+	</horizontal>
+	<horizontal>
+		<horizontal horizontal-fit='PreferredSize'>
+			<increment-setting id='standardPosXIncrement' text='X' value='standardPosXValue' increment='0.05'
+							   hover-hint="The left/right position" pref-width='28.5' apply-on-change="true"/>
+		</horizontal>
+		<horizontal horizontal-fit='PreferredSize'>
+			<increment-setting id='standardPosYIncrement' text='Y' value='standardPosYValue' increment='0.05'
+							   hover-hint="The up/down position" pref-width='28.5' apply-on-change="true"/>
+		</horizontal>
+		<horizontal horizontal-fit='PreferredSize'>
+			<increment-setting id='standardPosZIncrement' text='Z' value='standardPosZValue' increment='0.05'
+							   hover-hint="The forward/backward position" pref-width='28.5' apply-on-change="true"/>
+		</horizontal>
+	</horizontal>
+	<horizontal pref-width='90'>
+		<text text='Standard panel rotation:' font-size='5'/>
+	</horizontal>
+	<horizontal>
+		<horizontal horizontal-fit='PreferredSize'>
+			<increment-setting id='standardRotXIncrement' text='X' value='standardRotXValue' min='-355' max='355' increment='5'
+							   hover-hint="The roll axis" pref-width='28.5' apply-on-change="true"/>
+		</horizontal>
+		<horizontal horizontal-fit='PreferredSize'>
+			<increment-setting id='standardRotYIncrement' text='Y' value='standardRotYValue' min='-355' max='355' increment='5'
+							   hover-hint="The pitch axis" pref-width='28.5' apply-on-change="true"/>
+		</horizontal>
+		<horizontal horizontal-fit='PreferredSize'>
+			<increment-setting id='standardRotZIncrement' text='Z' value='standardRotZValue' min='-355' max='355' increment='5'
+							   hover-hint="The yaw axis" pref-width='28.5' apply-on-change="true"/>
+		</horizontal>
+	</horizontal>
+	<horizontal pref-width='90'>
+		<text text='90/360 panel position:' font-size='5'/>
+	</horizontal>
+	<horizontal>
+		<horizontal horizontal-fit='PreferredSize'>
+			<increment-setting id='nonStandardPosXIncrement' text='X' value='nonStandardPosXValue' increment='0.05'
+							   hover-hint="The left/right position" pref-width='28.5' apply-on-change="true"/>
+		</horizontal>
+		<horizontal horizontal-fit='PreferredSize'>
+			<increment-setting id='nonStandardPosYIncrement' text='Y' value='nonStandardPosYValue' increment='0.05'
+							   hover-hint="The up/down position" pref-width='28.5' apply-on-change="true"/>
+		</horizontal>
+		<horizontal horizontal-fit='PreferredSize'>
+			<increment-setting id='nonStandardPosZIncrement' text='Z' value='nonStandardPosZValue' increment='0.05'
+							   hover-hint="The forward/backward position" pref-width='28.5' apply-on-change="true"/>
+		</horizontal>
+	</horizontal>
+	<horizontal pref-width='90'>
+		<text text='90/360 panel rotation:' font-size='5'/>
+	</horizontal>
+	<horizontal>
+		<horizontal horizontal-fit='PreferredSize'>
+			<increment-setting id='nonStandardRotXIncrement' text='X' value='nonStandardRotXValue' min='-355' max='355' increment='5'
+							   hover-hint="The roll axis" pref-width='28.5' apply-on-change="true"/>
+		</horizontal>
+		<horizontal horizontal-fit='PreferredSize'>
+			<increment-setting id='nonStandardRotYIncrement' text='Y' value='nonStandardRotYValue' min='-355' max='355' increment='5'
+							   hover-hint="The pitch axis" pref-width='28.5' apply-on-change="true"/>
+		</horizontal>
+		<horizontal horizontal-fit='PreferredSize'>
+			<increment-setting id='nonStandardRotZIncrement' text='Z' value='nonStandardRotZValue' min='-355' max='355' increment='5'
+							   hover-hint="The yaw axis" pref-width='28.5' apply-on-change="true"/>
+		</horizontal>
+	</horizontal>
+	<bool-setting text='Show peak difficulty warning' value='peakWarning'
+				  hover-hint="Shows the warning text in-game when you're about to reach the peak difficulty of the song." apply-on-change="true"/>
+	<bool-setting text="Chart has a background color" value="showBackground" apply-on-change="true"/>
+	<slider-setting text="Background opacity" hover-hint="How opaque should the background be? Setting it to 0 will make it fully clear."
+					min="0.0" max="1.0" increment="0.05" value="backgroundOpacity" formatter="background-opacity-formatter" apply-on-change="true"/>
+	<color-setting text="The color of the background" value="backgroundColor" apply-on-change="true"/>
+	<color-setting text="The color of the line in the chart" value="lineColor" apply-on-change="true"/>
+	<color-setting text="The color of the dot in the chart" value="pointerColor" apply-on-change="true"/>
+</scrollable-settings-container>

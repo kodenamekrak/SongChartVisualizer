@@ -48,6 +48,7 @@ namespace SongChartVisualizer
         Quaternion rot = Quaternion::Euler(is360Level ? getModConfig().nonStandardLevelRotation.GetValue() : getModConfig().standardLevelRotation.GetValue());
         auto chartSize = UnityEngine::Vector2(getModConfig().showNpsLines.GetValue() ? 108 : 105, 65);
         _floatingScreen = BSML::FloatingScreen::CreateFloatingScreen(chartSize, false, pos, rot, 0, getModConfig().showBackground.GetValue());
+        _floatingScreen->GetComponent<Canvas*>()->set_sortingOrder(0);
 
         if (getModConfig().showBackground.GetValue())
         {

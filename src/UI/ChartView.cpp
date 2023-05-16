@@ -3,8 +3,6 @@
 #include "ModConfig.hpp"
 #include "Services/SvcAssetLoader.hpp"
 
-#include "UnityEngine/Quaternion.hpp"
-
 #include "GlobalNamespace/NoteData.hpp"
 
 #include "Tweening/FloatTween.hpp"
@@ -15,7 +13,9 @@
 
 #include "UnityEngine/Canvas.hpp"
 #include "UnityEngine/RenderMode.hpp"
+#include "UnityEngine/Quaternion.hpp"
 #include "UnityEngine/RectTransform.hpp"
+#include "UnityEngine/Resources.hpp"
 
 #include "System/Action_1.hpp"
 
@@ -49,6 +49,9 @@ namespace SongChartVisualizer
         auto chartSize = UnityEngine::Vector2(getModConfig().showNpsLines.GetValue() ? 108 : 105, 65);
         _floatingScreen = BSML::FloatingScreen::CreateFloatingScreen(chartSize, false, pos, rot, 0, getModConfig().showBackground.GetValue());
         _floatingScreen->GetComponent<Canvas*>()->set_sortingOrder(0);
+
+        _comboUIController = UnityEngine::Resources::FindObjectsOfTypeAll<ComboUIController*>().FirstOrDefault();
+        _floatingScreen->get_transform()->SetParent(_comboUIController->get_transform(), true);
 
         if (getModConfig().showBackground.GetValue())
         {

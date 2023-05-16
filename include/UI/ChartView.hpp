@@ -10,6 +10,7 @@
 
 #include "GlobalNamespace/AudioTimeSyncController.hpp"
 #include "GlobalNamespace/IReadonlyBeatmapData.hpp"
+#include "GlobalNamespace/ComboUIController.hpp"
 
 #include "HMUI/CurvedTextMeshPro.hpp"
 
@@ -26,6 +27,7 @@ ___DECLARE_TYPE_WRAPPER_INHERITANCE(SongChartVisualizer, ChartView, Il2CppTypeEn
     
     DECLARE_PRIVATE_FIELD(GlobalNamespace::AudioTimeSyncController*, _audioTimeSyncController);
     DECLARE_PRIVATE_FIELD(GlobalNamespace::IReadonlyBeatmapData*, _beatmapData);
+    DECLARE_PRIVATE_FIELD(GlobalNamespace::ComboUIController*, _comboUIController);
     DECLARE_PRIVATE_FIELD(Tweening::TimeTweeningManager*, _timeTweeningManager);
     DECLARE_PRIVATE_FIELD(SongChartVisualizer::WindowGraph*, _windowGraph);
     DECLARE_PRIVATE_FIELD(BSML::FloatingScreen*, _floatingScreen);

@@ -162,6 +162,9 @@ namespace SongChartVisualizer
             if (note->gameplayType != NoteData::GameplayType::Bomb)
                 notes.push_back(note);
         }
+        if(notes.empty())
+            return npsSections;
+
         std::sort(notes.begin(), notes.end(), [](NoteData *a, NoteData *b)
                   { return a->time < b->time; });
 
@@ -237,7 +240,9 @@ namespace SongChartVisualizer
     {
         getLogger().info("Fading in peak warning text");
         auto delegate = custom_types::MakeDelegate<System::Action_1<float> *>(std::function([text](float value)
-                                                                                            { text->set_alpha(value); }));
-        _timeTweeningManager->AddTween(Tweening::FloatTween::New_ctor(0, 1, delegate, t, EaseType::Linear, 0), _peakWarningText);
+        {
+            text->set_alpha(value);
+        }));
+        _timeTweeningManager->AddTween(Tweening::FloatTween::New_ctor(0, 1, delegate, t, EaseType::Linear, 0), this);
     }
 }

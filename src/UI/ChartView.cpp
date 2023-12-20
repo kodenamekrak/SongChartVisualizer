@@ -70,6 +70,13 @@ namespace SongChartVisualizer
         }
 
         _npsSections = GetNpsSections(_beatmapData);
+        if (_npsSections.size() <= 0)
+        {
+            getLogger().debug("_npsSections was empty, destroying graph");
+            UnityEngine::Object::Destroy(_floatingScreen);
+            _shouldNotRunTick = true;
+            return;
+        }
 
         _windowGraph = _floatingScreen->get_gameObject()->AddComponent<WindowGraph *>();
         _windowGraph->_canvas = _floatingScreen->GetComponent<Canvas *>();

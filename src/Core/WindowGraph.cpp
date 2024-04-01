@@ -20,7 +20,7 @@ namespace SongChartVisualizer
 
 	void WindowGraph::ShowGraph(std::vector<float> valueList, Color linkColor)
 	{
-		getLogger().info("Showing graph");
+		INFO("Showing graph");
 
 		Vector2 graphSizeDelta = Vector2(105, 65);
 		float width = graphSizeDelta.x;
@@ -66,12 +66,16 @@ namespace SongChartVisualizer
 			lastCircleGameObject = circleGameObject;
 		}
 
-		if (!getModConfig().showNpsLines.GetValue()) return;
+		if (!getModConfig().showNpsLines.GetValue()) 
+			return;
 		auto maxNps = *std::max_element(valueList.begin(), valueList.end());
 		auto minNps = *std::min_element(valueList.begin(), valueList.end());
 		auto maxPoint = (maxNps - yMinimum) / (yMaximum - yMinimum) * height;
 		auto minPoint = (minNps - yMinimum) / (yMaximum - yMinimum) * height;
-		CreateNpsLines(std::make_pair(maxNps, maxPoint), std::make_pair(minNps, minPoint));
+
+		auto maxPoints = std::make_pair(maxNps, maxPoint);
+		auto minPoints = std::make_pair(minNps, minPoint);
+		CreateNpsLines(maxPoints, minPoints);
 	}
 
 	GameObject *WindowGraph::CreateDotConnection(Vector2 dotPositionA, Vector2 dotPositionB, Color linkColor)
@@ -81,16 +85,18 @@ namespace SongChartVisualizer
 
 		auto image = go->AddComponent<HMUI::ImageView *>();
 		image->set_color(linkColor);
-		image->set_material(get_noGlowMaterial());
+		image->set_material(NoGlowMaterial);
 
-		auto dir = (dotPositionB - dotPositionA).get_normalized();
+		auto position = Vector2::op_Subtraction(dotPositionB, dotPositionA);
+		auto dir = position.get_normalized();
 		auto distance = Vector2::Distance(dotPositionA, dotPositionB);
 
 		auto rect = go->GetComponent<RectTransform *>();
 		rect->set_anchorMin(Vector2(0, 0));
 		rect->set_anchorMax(Vector2(0, 0));
-		rect->set_sizeDelta(Vector2(distance, 0.2f));
-		rect->set_anchoredPosition(UnityEngine::Vector2(dotPositionA + dir * distance * 0.5f));
+		rect->set_sizeDelta(Vector2(distance, 0.2f * distance));
+		auto pos = Vector2::op_Addition(dotPositionA, Vector2::op_Multiply(dir, distance * 0.5f));
+		rect->set_anchoredPosition(pos);
 		rect->set_localEulerAngles(Vector3(0, 0, atan2(dir.y, dir.x) * 57.29578f));
 
 		return go;
@@ -113,7 +119,7 @@ namespace SongChartVisualizer
 
 			auto image = go->AddComponent<HMUI::ImageView *>();
 			image->set_color(UnityEngine::Color::get_gray());
-			image->set_material(get_noGlowMaterial());
+			image->set_material(NoGlowMaterial);
 
 			auto currentPosition = zeroNpsPoint + ((float)currentNps * oneNpsGraphLength);
 
@@ -137,9 +143,9 @@ namespace SongChartVisualizer
 		go->get_transform()->SetParent(_canvas->get_transform(), false);
 
 		auto image = go->AddComponent<HMUI::ImageView *>();
-		image->set_material(get_noGlowMaterial());
+		image->set_material(NoGlowMaterial);
 		image->set_enabled(makeDotsVisible);
-		image->set_sprite(get_circleSprite());
+		image->set_sprite(CircleSprite);
 
 		auto rect = go->GetComponent<RectTransform *>();
 		rect->set_anchoredPosition(anchoredPosition);

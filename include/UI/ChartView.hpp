@@ -2,6 +2,7 @@
 
 #include "Core/WindowGraph.hpp"
 #include "Models/NpsInfo.hpp"
+#include "System/Object.hpp"
 
 #include "custom-types/shared/macros.hpp"
 #include "lapiz/shared/macros.hpp"
@@ -21,24 +22,24 @@
 #include "Zenject/IInitializable.hpp"
 #include "Zenject/ITickable.hpp"
 
-#define INTERFACES { classof(Zenject::IInitializable*), classof(Zenject::ITickable*) }
+#define INTERFACES { classof(Zenject::IInitializable*) }
 
-___DECLARE_TYPE_WRAPPER_INHERITANCE(SongChartVisualizer, ChartView, Il2CppTypeEnum::IL2CPP_TYPE_CLASS, Il2CppObject, "SongChartVisualizer", INTERFACES, 0, nullptr,
+DECLARE_CLASS_CODEGEN_INTERFACES_DLL(SongChartVisualizer, ChartView, System::Object, INTERFACES, "SongChartVisualizer",
     
-    DECLARE_PRIVATE_FIELD(GlobalNamespace::AudioTimeSyncController*, _audioTimeSyncController);
-    DECLARE_PRIVATE_FIELD(GlobalNamespace::IReadonlyBeatmapData*, _beatmapData);
-    DECLARE_PRIVATE_FIELD(GlobalNamespace::ComboUIController*, _comboUIController);
-    DECLARE_PRIVATE_FIELD(Tweening::TimeTweeningManager*, _timeTweeningManager);
-    DECLARE_PRIVATE_FIELD(SongChartVisualizer::WindowGraph*, _windowGraph);
-    DECLARE_PRIVATE_FIELD(BSML::FloatingScreen*, _floatingScreen);
-    DECLARE_PRIVATE_FIELD(bool, _shouldNotRunTick);
-    DECLARE_PRIVATE_FIELD(UnityEngine::GameObject*, _selfCursor);
-    DECLARE_PRIVATE_FIELD(UnityEngine::GameObject*, _peakWarningGo);
-    DECLARE_PRIVATE_FIELD(HMUI::CurvedTextMeshPro*, _peakWarningText);
+    DECLARE_INSTANCE_FIELD_PRIVATE(GlobalNamespace::AudioTimeSyncController*, _audioTimeSyncController);
+    DECLARE_INSTANCE_FIELD_PRIVATE(GlobalNamespace::IReadonlyBeatmapData*, _beatmapData);
+    DECLARE_INSTANCE_FIELD_PRIVATE(GlobalNamespace::ComboUIController*, _comboUIController);
+    DECLARE_INSTANCE_FIELD_PRIVATE(Tweening::TimeTweeningManager*, _timeTweeningManager);
+    DECLARE_INSTANCE_FIELD_PRIVATE(SongChartVisualizer::WindowGraph*, _windowGraph);
+    DECLARE_INSTANCE_FIELD_PRIVATE(BSML::FloatingScreen*, _floatingScreen);
+    DECLARE_INSTANCE_FIELD_PRIVATE(bool, _shouldNotRunTick);
+    DECLARE_INSTANCE_FIELD_PRIVATE(UnityEngine::GameObject*, _selfCursor);
+    DECLARE_INSTANCE_FIELD_PRIVATE(UnityEngine::GameObject*, _peakWarningGo);
+    DECLARE_INSTANCE_FIELD_PRIVATE(HMUI::CurvedTextMeshPro*, _peakWarningText);
 
-    DECLARE_PRIVATE_FIELD(int, _currentSectionIdx);
-    DECLARE_PRIVATE_FIELD(int, _hardestSectionIdx);
-    DECLARE_PRIVATE_FIELD(float, _timeTillPeak);
+    DECLARE_INSTANCE_FIELD_PRIVATE(int, _currentSectionIdx);
+    DECLARE_INSTANCE_FIELD_PRIVATE(int, _hardestSectionIdx);
+    DECLARE_INSTANCE_FIELD_PRIVATE(float, _timeTillPeak);
 
     DECLARE_INSTANCE_METHOD(UnityEngine::GameObject*, CreateSelfCursor, UnityEngine::Color color);
     DECLARE_INSTANCE_METHOD(void, PrepareWarningText);
@@ -47,8 +48,8 @@ ___DECLARE_TYPE_WRAPPER_INHERITANCE(SongChartVisualizer, ChartView, Il2CppTypeEn
 
     std::vector<NpsInfo> GetNpsSections(GlobalNamespace::IReadonlyBeatmapData* beatmapData);
 
-    DECLARE_OVERRIDE_METHOD(void, Initialize, il2cpp_utils::il2cpp_type_check::MetadataGetter<&::Zenject::IInitializable::Initialize>::get());
-    DECLARE_OVERRIDE_METHOD(void, Tick, il2cpp_utils::il2cpp_type_check::MetadataGetter<&::Zenject::ITickable::Tick>::get());
+    DECLARE_OVERRIDE_METHOD_MATCH(void, Initialize, &Zenject::IInitializable::Initialize);
+    DECLARE_OVERRIDE_METHOD_MATCH(void, Tick, &Zenject::ITickable::Tick);
 
     DECLARE_CTOR(ctor, GlobalNamespace::AudioTimeSyncController* audioTimeSyncController, GlobalNamespace::IReadonlyBeatmapData* readonlyBeatmapData, Tweening::TimeTweeningManager* timeTweeningManager);
 

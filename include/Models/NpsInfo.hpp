@@ -3,6 +3,8 @@ struct NpsInfo {
     float FromTime;
     float ToTime;
 
+    NpsInfo();
+
     NpsInfo(float nps, float fromTime, float toTime)
     {
         Nps = nps;

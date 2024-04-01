@@ -8,32 +8,23 @@
 #include "lapiz/shared/zenject/Zenjector.hpp"
 #include "lapiz/shared/AttributeRegistration.hpp"
 
-static ModInfo modInfo;
-
-Logger &getLogger()
-{
-    static Logger *logger = new Logger(modInfo);
-    return *logger;
-}
+static modloader::ModInfo modInfo{MOD_ID, VERSION, 0};
 
 // Called at the early stages of game loading
-extern "C" void setup(ModInfo &info)
+SCV_EXPORT void setup(CModInfo* info)
 {
-    info.id = MOD_ID;
-    info.version = VERSION;
-    modInfo = info;
+    *info = modInfo.to_c();
 
-    getLogger().info("Completed setup!");
+    getModConfig().Init(modInfo);
+    INFO("Completed setup!");
 }
 
 // Called later on in the game loading - a good time to install function hooks
-extern "C" void load()
+SCV_EXPORT void load()
 {
     il2cpp_functions::Init();
 
-    getModConfig().Init(modInfo);
-
-    getLogger().info("Installing SongChartVisualizer...");
+    INFO("Installing SongChartVisualizer...");
 
     custom_types::Register::AutoRegister();
     Lapiz::Attributes::AutoRegister();
@@ -41,9 +32,9 @@ extern "C" void load()
     BSML::Register::RegisterSettingsMenu<SongChartVisualizer::SettingsViewController*>("SongChartVisualizer");
     BSML::Register::RegisterMainMenu<SongChartVisualizer::SettingsViewController*>("SongChartVisualizer", "SongChartVisualizer", "SongChartVisualizer settings menu!");
 
-    auto zenjector = Lapiz::Zenject::Zenjector::Get();
-    zenjector->Install<SongChartVisualizer::Installers::GameInstaller*>(Lapiz::Zenject::Location::StandardPlayer);
-    zenjector->Install<SongChartVisualizer::Installers::GameInstaller*>(Lapiz::Zenject::Location::Multi);
+    using namespace Lapiz::Zenject;
+    auto zenjector = Zenjector::Get();
+    zenjector->Install<SongChartVisualizer::Installers::GameInstaller*>(Location::StandardPlayer | Location::Multi);
 
-    getLogger().info("Installed SongChartVisualizer!");
+    INFO("Installed SongChartVisualizer!");
 }

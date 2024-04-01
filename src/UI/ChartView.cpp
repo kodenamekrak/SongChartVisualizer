@@ -21,6 +21,8 @@
 
 #include "custom-types/shared/delegate.hpp"
 
+#include "System/Linq/Enumerable.hpp"
+
 #include "HMUI/CurvedCanvasSettings.hpp"
 #include "fmt/format.h"
 
@@ -41,7 +43,7 @@ namespace SongChartVisualizer
 
     void ChartView::Initialize()
     {
-        getLogger().info("Initializing graph");
+        INFO("Initializing graph");
 
         bool is360Level = _beatmapData->get_spawnRotationEventsCount() > 0;
         Vector3 pos = is360Level ? getModConfig().nonStandardLevelPosition.GetValue() : getModConfig().standardLevelPosition.GetValue();
@@ -50,17 +52,17 @@ namespace SongChartVisualizer
         _floatingScreen = BSML::FloatingScreen::CreateFloatingScreen(chartSize, false, pos, rot, 0, getModConfig().showBackground.GetValue());
         _floatingScreen->GetComponent<Canvas*>()->set_sortingOrder(0);
 
-        _comboUIController = UnityEngine::Resources::FindObjectsOfTypeAll<ComboUIController*>().FirstOrDefault();
+        _comboUIController = UnityEngine::Resources::FindObjectsOfTypeAll<ComboUIController*>().front_or_default();
         _floatingScreen->get_transform()->SetParent(_comboUIController->get_transform(), true);
 
         if (getModConfig().showBackground.GetValue())
         {
-            auto image = _floatingScreen->GetComponent<Canvas *>()->get_transform()->GetComponentsInChildren<HMUI::ImageView *>().FirstOrDefault([](auto x)
+            auto image = _floatingScreen->GetComponent<Canvas *>()->get_transform()->GetComponentsInChildren<HMUI::ImageView *>().front_or_default([](auto x)
                                                                                                                                                  { return x->get_name() == "bg"; });
             auto color = getModConfig().backgroundColor.GetValue();
             color.a = getModConfig().backgroundOpacity.GetValue();
             image->set_color(color);
-            image->set_material(get_noGlowMaterial());
+            image->set_material(NoGlowMaterial);
         }
 
         if (_audioTimeSyncController->get_songLength() < 0)
@@ -72,7 +74,7 @@ namespace SongChartVisualizer
         _npsSections = GetNpsSections(_beatmapData);
         if (_npsSections.size() <= 0)
         {
-            getLogger().debug("_npsSections was empty, destroying graph");
+            DEBUG("_npsSections was empty, destroying graph");
             UnityEngine::Object::Destroy(_floatingScreen);
             _shouldNotRunTick = true;
             return;
@@ -95,7 +97,7 @@ namespace SongChartVisualizer
         {
             auto iter = std::max_element(std::begin(values), std::end(values));
             _hardestSectionIdx = iter - values.begin();
-            getLogger().info("Peak warning is at index %i", _hardestSectionIdx);
+            INFO("Peak warning is at index {}", _hardestSectionIdx);
 
             PrepareWarningText();
             FadeInTextIfNeeded();
@@ -135,7 +137,7 @@ namespace SongChartVisualizer
                 return;
 
             _timeTillPeak = timeTillPeakLocal;
-            _peakWarningText->SetText(fmt::format("You're about to reach the peak difficulty in <color=#ffa500ff>{:.1f}</color> seconds!", _timeTillPeak));
+            _peakWarningText->text = fmt::format("You're about to reach the peak difficulty in <color=#ffa500ff>{:.1f}</color> seconds!", _timeTillPeak);
         }
     }
 
@@ -146,7 +148,7 @@ namespace SongChartVisualizer
 
         auto image = go->AddComponent<HMUI::ImageView *>();
         image->set_color(color);
-        image->set_material(get_noGlowMaterial());
+        image->set_material(NoGlowMaterial);
 
         auto rect = go->GetComponent<RectTransform *>();
         rect->set_sizeDelta(Vector2(1.2f, 1.2f));
@@ -161,7 +163,7 @@ namespace SongChartVisualizer
         if (songDuration < 0)
             return npsSections;
 
-        ArrayW<NoteData *> noteList = List<NoteData *>::New_ctor(beatmapData->GetBeatmapDataItems<NoteData *>(0))->ToArray();
+        auto noteList = System::Linq::Enumerable::ToArray(beatmapData->GetBeatmapDataItems<NoteData *>(0));
         std::vector<NoteData *> notes;
 
         for (NoteData *note : noteList)
@@ -210,14 +212,12 @@ namespace SongChartVisualizer
 
         _peakWarningGo->AddComponent<HMUI::CurvedCanvasSettings *>()->SetRadius(0);
 
-        auto transform = canvas->get_transform();
-        transform->set_position(Vector3(0, 2.25f, 3.5f));
-        transform->set_localScale(transform->get_localScale() / 100);
+        auto canvasTransform = canvas->get_transform();
+        canvasTransform->set_position(Vector3(0, 2.25f, 3.5f));
+        canvasTransform->set_localScale(Vector3::op_Division(canvasTransform->localScale, 100));
 
-        auto cast = il2cpp_utils::try_cast<RectTransform>(transform);
-        if (cast)
+        if (RectTransform* rect = canvasTransform.try_cast<RectTransform>().value_or(nullptr))
         {
-            auto rect = cast.value();
             rect->set_sizeDelta(Vector2(140, 50));
 
             _peakWarningText = BSML::Helpers::CreateText(rect, "", Vector2::get_zero());
@@ -245,7 +245,7 @@ namespace SongChartVisualizer
 
     void ChartView::FadeInText(HMUI::CurvedTextMeshPro *text, float t)
     {
-        getLogger().info("Fading in peak warning text");
+        INFO("Fading in peak warning text");
         auto delegate = custom_types::MakeDelegate<System::Action_1<float> *>(std::function([text](float value)
         {
             text->set_alpha(value);

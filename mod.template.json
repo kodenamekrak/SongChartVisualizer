@@ -11,7 +11,7 @@
   "modloader": "QuestLoader",
   "description": "",
   "dependencies": [],
-  "modFiles": [
+  "lateModFiles": [
     "${binary}"
   ],
   "libraryFiles": [],

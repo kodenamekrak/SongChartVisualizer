@@ -9,9 +9,9 @@
 
 DECLARE_CLASS_CODEGEN(SongChartVisualizer::Installers, GameInstaller, Zenject::Installer,
 
-    DECLARE_PRIVATE_FIELD(GlobalNamespace::GameplayCoreSceneSetupData*, _gameplayCoreSceneSetupData);
+    DECLARE_INSTANCE_FIELD_PRIVATE(GlobalNamespace::GameplayCoreSceneSetupData*, _gameplayCoreSceneSetupData);
 
-    DECLARE_OVERRIDE_METHOD(void, InstallBindings, il2cpp_utils::il2cpp_type_check::MetadataGetter<&Zenject::Installer::InstallBindings>::get());
+    DECLARE_OVERRIDE_METHOD_MATCH(void, InstallBindings, &Zenject::Installer::InstallBindings);
 
     DECLARE_CTOR(ctor, GlobalNamespace::GameplayCoreSceneSetupData* gameplayCoreSceneSetupData);
 )

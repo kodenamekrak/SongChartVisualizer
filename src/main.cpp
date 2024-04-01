@@ -20,7 +20,7 @@ SCV_EXPORT void setup(CModInfo* info)
 }
 
 // Called later on in the game loading - a good time to install function hooks
-SCV_EXPORT void load()
+SCV_EXPORT void late_load()
 {
     il2cpp_functions::Init();
 

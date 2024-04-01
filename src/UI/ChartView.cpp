@@ -18,10 +18,12 @@
 #include "UnityEngine/Resources.hpp"
 
 #include "System/Action_1.hpp"
+#include "System/Linq/Enumerable.hpp"
+#include "System/Collections/Generic/LinkedListNode_1.hpp"
+#include "System/Collections/Generic/LinkedList_1.hpp"
 
 #include "custom-types/shared/delegate.hpp"
 
-#include "System/Linq/Enumerable.hpp"
 
 #include "HMUI/CurvedCanvasSettings.hpp"
 #include "fmt/format.h"
@@ -57,6 +59,7 @@ namespace SongChartVisualizer
 
         if (getModConfig().showBackground.GetValue())
         {
+            DEBUG("Setting background");
             auto image = _floatingScreen->GetComponent<Canvas *>()->get_transform()->GetComponentsInChildren<HMUI::ImageView *>().front_or_default([](auto x)
                                                                                                                                                  { return x->get_name() == "bg"; });
             auto color = getModConfig().backgroundColor.GetValue();
@@ -143,16 +146,16 @@ namespace SongChartVisualizer
 
     GameObject *ChartView::CreateSelfCursor(UnityEngine::Color color)
     {
-        GameObject *go = GameObject::New_ctor("SelfCursor");
-        go->get_transform()->SetParent(_floatingScreen->GetComponent<Canvas *>()->get_transform(), false);
+        GameObject* selfCursor = GameObject::New_ctor("SelfCursor");
+        selfCursor->get_transform()->SetParent(_floatingScreen->GetComponent<Canvas*>()->transform, false);
 
-        auto image = go->AddComponent<HMUI::ImageView *>();
+        auto image = selfCursor->AddComponent<HMUI::ImageView *>();
         image->set_color(color);
         image->set_material(NoGlowMaterial);
 
-        auto rect = go->GetComponent<RectTransform *>();
+        auto rect = selfCursor->GetComponent<RectTransform *>();
         rect->set_sizeDelta(Vector2(1.2f, 1.2f));
-        return go;
+        return selfCursor;
     }
 
     std::vector<NpsInfo> ChartView::GetNpsSections(IReadonlyBeatmapData *beatmapData)
@@ -163,14 +166,21 @@ namespace SongChartVisualizer
         if (songDuration < 0)
             return npsSections;
 
-        auto noteList = System::Linq::Enumerable::ToArray(beatmapData->GetBeatmapDataItems<NoteData *>(0));
-        std::vector<NoteData *> notes;
-
-        for (NoteData *note : noteList)
+        // beatmapData->GetBeatmapDataItems crashes 
+        std::vector<NoteData*> notes;
+        for(auto node = beatmapData->allBeatmapDataItems->head; node != nullptr; node = node->Next)
         {
-            if (note->gameplayType != NoteData::GameplayType::Bomb)
-                notes.push_back(note);
+            if(node->Value->type != BeatmapDataItem::BeatmapDataItemType::BeatmapObject || node->Value->subtypeGroupIdentifier != 0)
+                continue;
+            
+            if(auto noteData = il2cpp_utils::try_cast<NoteData>(node->Value))
+            {
+                if(noteData.value()->gameplayType != NoteData::GameplayType::Bomb)
+                    notes.push_back(noteData.value());
+            }
         }
+        DEBUG("Got {} NoteData items", notes.size());
+
         if(notes.empty())
             return npsSections;
 

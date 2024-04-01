@@ -81,7 +81,7 @@ namespace SongChartVisualizer
 	GameObject *WindowGraph::CreateDotConnection(Vector2 dotPositionA, Vector2 dotPositionB, Color linkColor)
 	{
 		GameObject *go = GameObject::New_ctor("DotConnection");
-		go->get_transform()->SetParent(_canvas->get_transform(), false);
+		go->get_transform()->SetParent(_canvas->transform, false);
 
 		auto image = go->AddComponent<HMUI::ImageView *>();
 		image->set_color(linkColor);
@@ -115,7 +115,7 @@ namespace SongChartVisualizer
 		while(currentNps < maxPoints.first){
 			currentNps += npsIncrement;
 			GameObject *go = GameObject::New_ctor("NpsLine");
-			go->get_transform()->SetParent(_canvas->get_transform(), false);
+			go->get_transform()->SetParent(_canvas->transform, false);
 
 			auto image = go->AddComponent<HMUI::ImageView *>();
 			image->set_color(UnityEngine::Color::get_gray());
@@ -140,7 +140,7 @@ namespace SongChartVisualizer
 	GameObject *WindowGraph::CreateCircle(Vector2 anchoredPosition, bool makeDotsVisible)
 	{
 		GameObject *go = GameObject::New_ctor("Circle");
-		go->get_transform()->SetParent(_canvas->get_transform(), false);
+		go->get_transform()->SetParent(_canvas->transform, false);
 
 		auto image = go->AddComponent<HMUI::ImageView *>();
 		image->set_material(NoGlowMaterial);

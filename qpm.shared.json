@@ -6,7 +6,7 @@
     "info": {
       "name": "SongChartVisualizer",
       "id": "songchartvisualizer",
-      "version": "1.0.1",
+      "version": "1.1.0",
       "url": null,
       "additionalData": {
         "overrideSoName": "libsongchartvisualizer.so",
@@ -85,27 +85,29 @@
     {
       "dependency": {
         "id": "bsml",
-        "versionRange": "=0.4.21",
+        "versionRange": "=0.4.22",
         "additionalData": {
-          "soLink": "https://github.com/RedBrumbler/Quest-BSML/releases/download/v0.4.21/libbsml.so",
-          "debugSoLink": "https://github.com/RedBrumbler/Quest-BSML/releases/download/v0.4.21/debug_libbsml.so",
+          "soLink": "https://github.com/RedBrumbler/Quest-BSML/releases/download/v0.4.22/libbsml.so",
+          "debugSoLink": "https://github.com/RedBrumbler/Quest-BSML/releases/download/v0.4.22/debug_libbsml.so",
           "overrideSoName": "libbsml.so",
-          "modLink": "https://github.com/RedBrumbler/Quest-BSML/releases/download/v0.4.21/BSML.qmod",
-          "branchName": "version/v0_4_21",
+          "modLink": "https://github.com/RedBrumbler/Quest-BSML/releases/download/v0.4.22/BSML.qmod",
+          "branchName": "version/v0_4_22",
           "cmake": true
         }
       },
-      "version": "0.4.21"
+      "version": "0.4.22"
     },
     {
       "dependency": {
-        "id": "libil2cpp",
-        "versionRange": "=0.3.1",
+        "id": "rapidjson-macros",
+        "versionRange": "=1.2.1",
         "additionalData": {
-          "headersOnly": true
+          "headersOnly": true,
+          "branchName": "version/v1_2_1",
+          "cmake": true
         }
       },
-      "version": "0.3.1"
+      "version": "1.2.1"
     },
     {
       "dependency": {
@@ -143,15 +145,13 @@
     },
     {
       "dependency": {
-        "id": "rapidjson-macros",
-        "versionRange": "=1.2.1",
+        "id": "libil2cpp",
+        "versionRange": "=0.3.1",
         "additionalData": {
-          "headersOnly": true,
-          "branchName": "version/v1_2_1",
-          "cmake": true
+          "headersOnly": true
         }
       },
-      "version": "1.2.1"
+      "version": "0.3.1"
     },
     {
       "dependency": {

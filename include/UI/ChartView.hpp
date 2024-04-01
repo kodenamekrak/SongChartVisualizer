@@ -22,10 +22,12 @@
 #include "Zenject/IInitializable.hpp"
 #include "Zenject/ITickable.hpp"
 
-#define INTERFACES { classof(Zenject::IInitializable*) }
+#include <initializer_list>
+
+static std::initializer_list<Il2CppClass*> INTERFACES = { classof(Zenject::IInitializable*), classof(Zenject::ITickable*) };
 
 DECLARE_CLASS_CODEGEN_INTERFACES_DLL(SongChartVisualizer, ChartView, System::Object, INTERFACES, "SongChartVisualizer",
-    
+
     DECLARE_INSTANCE_FIELD_PRIVATE(GlobalNamespace::AudioTimeSyncController*, _audioTimeSyncController);
     DECLARE_INSTANCE_FIELD_PRIVATE(GlobalNamespace::IReadonlyBeatmapData*, _beatmapData);
     DECLARE_INSTANCE_FIELD_PRIVATE(GlobalNamespace::ComboUIController*, _comboUIController);

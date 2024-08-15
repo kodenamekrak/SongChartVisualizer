@@ -94,7 +94,7 @@ namespace SongChartVisualizer
 		auto rect = go->GetComponent<RectTransform *>();
 		rect->set_anchorMin(Vector2(0, 0));
 		rect->set_anchorMax(Vector2(0, 0));
-		rect->set_sizeDelta(Vector2(distance, 0.2f * distance));
+		rect->set_sizeDelta(Vector2(distance, 0.2f));
 		auto pos = Vector2::op_Addition(dotPositionA, Vector2::op_Multiply(dir, distance * 0.5f));
 		rect->set_anchoredPosition(pos);
 		rect->set_localEulerAngles(Vector3(0, 0, atan2(dir.y, dir.x) * 57.29578f));

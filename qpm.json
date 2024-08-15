@@ -13,10 +13,33 @@
     }
   },
   "workspace": {
-    "scripts": {},
-    "qmodIncludeDirs": [],
+    "scripts": {
+      "build": [
+        "pwsh ./scripts/build.ps1"
+      ],
+      "clean": [
+        "pwsh ./scripts/build.ps1 -clean"
+      ],
+      "copy": [
+        "pwsh ./scripts/copy.ps1"
+      ],
+      "logcat": [
+        "adb logcat -c",
+        "pwsh ./scripts/start-logging.ps1"
+      ],
+      "restart": [
+        "pwsh ./scripts/restart-game.ps1"
+      ],
+      "stack": [
+        "pwsh ./scripts/ndk-stack.ps1"
+      ],
+      "tomb": [
+        "pwsh ./scripts/pull-tombstone.ps1"
+      ]
+    },
+    "qmodIncludeDirs": ["./build", "./extern/libs"],
     "qmodIncludeFiles": [],
-    "qmodOutput": null
+    "qmodOutput": "SongChartVisualizer"
   },
   "dependencies": [
     {

@@ -260,6 +260,6 @@ namespace SongChartVisualizer
         {
             text->set_alpha(value);
         }));
-        _timeTweeningManager->AddTween(Tweening::FloatTween::New_ctor(0, 1, delegate, t, EaseType::Linear, 0), this);
+        _timeTweeningManager->AddTween(Tweening::FloatTween::New_ctor(0, 1, delegate, t, EaseType::Linear, 0), this, false);
     }
 }

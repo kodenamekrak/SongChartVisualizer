@@ -1,9 +1,11 @@
+#pragma once
+
 struct NpsInfo {
     float Nps;
     float FromTime;
     float ToTime;
 
-    NpsInfo();
+    NpsInfo() = default;
 
     NpsInfo(float nps, float fromTime, float toTime)
     {

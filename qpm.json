@@ -17,6 +17,9 @@
       "build": [
         "pwsh ./scripts/build.ps1"
       ],
+      "qmod": [
+        "qpm qmod zip"
+      ],
       "clean": [
         "pwsh ./scripts/build.ps1 -clean"
       ],

@@ -18,15 +18,12 @@
 #include "UnityEngine/Resources.hpp"
 
 #include "System/Action_1.hpp"
-#include "System/Linq/Enumerable.hpp"
 #include "System/Collections/Generic/LinkedListNode_1.hpp"
 #include "System/Collections/Generic/LinkedList_1.hpp"
 
 #include "custom-types/shared/delegate.hpp"
 
-
 #include "HMUI/CurvedCanvasSettings.hpp"
-#include "fmt/format.h"
 
 DEFINE_TYPE(SongChartVisualizer, ChartView);
 
@@ -41,6 +38,8 @@ namespace SongChartVisualizer
         _audioTimeSyncController = audioTimeSyncController;
         _beatmapData = readonlyBeatmapData;
         _timeTweeningManager = timeTweeningManager;
+
+        INVOKE_CTOR();
     }
 
     void ChartView::Initialize()
@@ -55,7 +54,7 @@ namespace SongChartVisualizer
         _floatingScreen->GetComponent<Canvas*>()->set_sortingOrder(0);
 
         _comboUIController = UnityEngine::Resources::FindObjectsOfTypeAll<ComboUIController*>().front_or_default();
-        _floatingScreen->get_transform()->SetParent(_comboUIController->get_transform(), true);
+        _floatingScreen->get_transform()->SetParent(_comboUIController->get_transform()->parent, true);
 
         if (getModConfig().showBackground.GetValue())
         {

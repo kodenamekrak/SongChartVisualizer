@@ -7,7 +7,7 @@
 #include "UnityEngine/Canvas.hpp"
 #include "UnityEngine/Vector2.hpp"
 
-DECLARE_CLASS_CODEGEN(SongChartVisualizer, WindowGraph, UnityEngine::MonoBehaviour,
+DECLARE_CLASS_CODEGEN(SongChartVisualizer, WindowGraph, UnityEngine::MonoBehaviour) {
     
     DECLARE_INSTANCE_FIELD(UnityEngine::Canvas*, _canvas);
     
@@ -21,4 +21,4 @@ public:
     
     std::vector<UnityEngine::GameObject*> linkPositions;
     std::vector<UnityEngine::GameObject*> dotObjects;
-)
+};

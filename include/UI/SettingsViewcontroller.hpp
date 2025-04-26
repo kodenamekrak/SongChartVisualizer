@@ -10,7 +10,7 @@
 
 #include "macros.hpp"
 
-DECLARE_CLASS_CODEGEN(SongChartVisualizer, SettingsViewController, HMUI::ViewController,
+DECLARE_CLASS_CODEGEN(SongChartVisualizer, SettingsViewController, HMUI::ViewController) {
 
     DECLARE_OVERRIDE_METHOD_MATCH(void, DidActivate, &HMUI::ViewController::DidActivate, bool firstActivation, bool addedToHierarchy, bool screenSystemEnabling);
 
@@ -29,6 +29,6 @@ DECLARE_CLASS_CODEGEN(SongChartVisualizer, SettingsViewController, HMUI::ViewCon
     DECLARE_BSML_PROPERTY(UnityEngine::Color, lineColor);
     DECLARE_BSML_PROPERTY(UnityEngine::Color, pointerColor);
 
-    private:
-        std::vector<BSML::IncrementSetting*> incrementSettings;
-)
+private:
+    std::vector<BSML::IncrementSetting*> incrementSettings;
+};

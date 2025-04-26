@@ -12,6 +12,7 @@
 #include "GlobalNamespace/AudioTimeSyncController.hpp"
 #include "GlobalNamespace/IReadonlyBeatmapData.hpp"
 #include "GlobalNamespace/ComboUIController.hpp"
+#include "GlobalNamespace/BeatmapKey.hpp"
 
 #include "HMUI/CurvedTextMeshPro.hpp"
 
@@ -22,14 +23,11 @@
 #include "Zenject/IInitializable.hpp"
 #include "Zenject/ITickable.hpp"
 
-#include <initializer_list>
-
-static std::initializer_list<Il2CppClass*> INTERFACES = { classof(Zenject::IInitializable*), classof(Zenject::ITickable*) };
-
-DECLARE_CLASS_CODEGEN_INTERFACES_DLL(SongChartVisualizer, ChartView, System::Object, INTERFACES, "SongChartVisualizer",
+DECLARE_CLASS_CODEGEN_INTERFACES(SongChartVisualizer, ChartView, System::Object, Zenject::IInitializable*, Zenject::ITickable*) {
 
     DECLARE_INSTANCE_FIELD_PRIVATE(GlobalNamespace::AudioTimeSyncController*, _audioTimeSyncController);
     DECLARE_INSTANCE_FIELD_PRIVATE(GlobalNamespace::IReadonlyBeatmapData*, _beatmapData);
+    DECLARE_INSTANCE_FIELD_PRIVATE(GlobalNamespace::BeatmapKey, _beatmapKey);
     DECLARE_INSTANCE_FIELD_PRIVATE(GlobalNamespace::ComboUIController*, _comboUIController);
     DECLARE_INSTANCE_FIELD_PRIVATE(Tweening::TimeTweeningManager*, _timeTweeningManager);
     DECLARE_INSTANCE_FIELD_PRIVATE(SongChartVisualizer::WindowGraph*, _windowGraph);
@@ -53,8 +51,8 @@ DECLARE_CLASS_CODEGEN_INTERFACES_DLL(SongChartVisualizer, ChartView, System::Obj
     DECLARE_OVERRIDE_METHOD_MATCH(void, Initialize, &Zenject::IInitializable::Initialize);
     DECLARE_OVERRIDE_METHOD_MATCH(void, Tick, &Zenject::ITickable::Tick);
 
-    DECLARE_CTOR(ctor, GlobalNamespace::AudioTimeSyncController* audioTimeSyncController, GlobalNamespace::IReadonlyBeatmapData* readonlyBeatmapData, Tweening::TimeTweeningManager* timeTweeningManager);
+    DECLARE_CTOR(ctor, GlobalNamespace::AudioTimeSyncController* audioTimeSyncController, GlobalNamespace::IReadonlyBeatmapData* readonlyBeatmapData, GlobalNamespace::BeatmapKey beatmapKey, Tweening::TimeTweeningManager* timeTweeningManager);
 
     std::vector<NpsInfo> _npsSections;
     NpsInfo _currentSection;
-)
+};

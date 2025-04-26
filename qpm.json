@@ -5,7 +5,7 @@
   "info": {
     "name": "SongChartVisualizer",
     "id": "songchartvisualizer",
-    "version": "1.1.0",
+    "version": "1.1.1",
     "url": null,
     "additionalData": {
       "overrideSoName": "libsongchartvisualizer.so",
@@ -17,9 +17,6 @@
       "build": [
         "pwsh ./scripts/build.ps1"
       ],
-      "qmod": [
-        "qpm qmod zip"
-      ],
       "clean": [
         "pwsh ./scripts/build.ps1 -clean"
       ],
@@ -29,6 +26,9 @@
       "logcat": [
         "adb logcat -c",
         "pwsh ./scripts/start-logging.ps1"
+      ],
+      "qmod": [
+        "qpm qmod zip"
       ],
       "restart": [
         "pwsh ./scripts/restart-game.ps1"
@@ -50,17 +50,17 @@
   "dependencies": [
     {
       "id": "beatsaber-hook",
-      "versionRange": "^5.1.9",
+      "versionRange": "^6.4.1",
       "additionalData": {}
     },
     {
       "id": "config-utils",
-      "versionRange": "^1.4.2",
+      "versionRange": "^2.0.2",
       "additionalData": {}
     },
     {
       "id": "custom-types",
-      "versionRange": "^0.17.6",
+      "versionRange": "^0.18.2",
       "additionalData": {}
     },
     {
@@ -71,23 +71,23 @@
       }
     },
     {
-      "id": "paper",
-      "versionRange": "^3.6.3",
-      "additionalData": {}
-    },
-    {
       "id": "bsml",
-      "versionRange": "^0.4.42",
+      "versionRange": "^0.4.51",
       "additionalData": {}
     },
     {
       "id": "bs-cordl",
-      "versionRange": "^3700.0.0",
+      "versionRange": "^4004.0.0",
       "additionalData": {}
     },
     {
       "id": "lapiz",
-      "versionRange": "^0.2.11",
+      "versionRange": "^0.2.19",
+      "additionalData": {}
+    },
+    {
+      "id": "paper2_scotland2",
+      "versionRange": "^4.6.1",
       "additionalData": {}
     }
   ]

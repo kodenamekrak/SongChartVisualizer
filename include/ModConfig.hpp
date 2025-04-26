@@ -2,7 +2,7 @@
 
 #include "UnityEngine/Vector2.hpp"
 
-DECLARE_CONFIG(ModConfig,
+DECLARE_CONFIG(ModConfig) {
     CONFIG_VALUE(showGraph, bool, "Enabled", true);
     CONFIG_VALUE(peakWarning, bool, "PeakWarning", true);
     CONFIG_VALUE(showNpsLines, bool, "ShowNpsLines", false);
@@ -18,4 +18,4 @@ DECLARE_CONFIG(ModConfig,
     CONFIG_VALUE(backgroundColor, UnityEngine::Color, "BackgroundColor", UnityEngine::Color::get_blue());
     CONFIG_VALUE(lineColor, UnityEngine::Color, "LineColor", UnityEngine::Color::get_white());
     CONFIG_VALUE(pointerColor, UnityEngine::Color, "PointerColor", UnityEngine::Color::get_green());
-)
+};

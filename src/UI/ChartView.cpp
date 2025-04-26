@@ -4,6 +4,7 @@
 #include "Services/SvcAssetLoader.hpp"
 
 #include "GlobalNamespace/NoteData.hpp"
+#include "GlobalNamespace/BeatmapCharacteristicSO.hpp"
 
 #include "Tweening/FloatTween.hpp"
 
@@ -33,10 +34,11 @@ using namespace GlobalNamespace;
 namespace SongChartVisualizer
 {
 
-    void ChartView::ctor(AudioTimeSyncController *audioTimeSyncController, IReadonlyBeatmapData *readonlyBeatmapData, Tweening::TimeTweeningManager *timeTweeningManager)
+    void ChartView::ctor(AudioTimeSyncController *audioTimeSyncController, IReadonlyBeatmapData *readonlyBeatmapData, GlobalNamespace::BeatmapKey beatmapKey, Tweening::TimeTweeningManager *timeTweeningManager)
     {
         _audioTimeSyncController = audioTimeSyncController;
         _beatmapData = readonlyBeatmapData;
+        _beatmapKey = beatmapKey;
         _timeTweeningManager = timeTweeningManager;
 
         INVOKE_CTOR();
@@ -46,7 +48,7 @@ namespace SongChartVisualizer
     {
         INFO("Initializing graph");
 
-        bool is360Level = _beatmapData->get_spawnRotationEventsCount() > 0;
+        bool is360Level = _beatmapKey.beatmapCharacteristic->requires360Movement;
         Vector3 pos = is360Level ? getModConfig().nonStandardLevelPosition.GetValue() : getModConfig().standardLevelPosition.GetValue();
         Quaternion rot = Quaternion::Euler(is360Level ? getModConfig().nonStandardLevelRotation.GetValue() : getModConfig().standardLevelRotation.GetValue());
         auto chartSize = UnityEngine::Vector2(getModConfig().showNpsLines.GetValue() ? 108 : 105, 65);

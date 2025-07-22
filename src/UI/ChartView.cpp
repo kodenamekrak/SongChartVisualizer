@@ -34,19 +34,18 @@ using namespace GlobalNamespace;
 namespace SongChartVisualizer
 {
 
-    void ChartView::ctor(AudioTimeSyncController *audioTimeSyncController, IReadonlyBeatmapData *readonlyBeatmapData, GlobalNamespace::BeatmapKey beatmapKey, Tweening::TimeTweeningManager *timeTweeningManager)
+    void ChartView::Inject(AudioTimeSyncController *audioTimeSyncController, IReadonlyBeatmapData *readonlyBeatmapData, GlobalNamespace::BeatmapKey beatmapKey, Tweening::TimeTweeningManager *timeTweeningManager)
     {
         _audioTimeSyncController = audioTimeSyncController;
         _beatmapData = readonlyBeatmapData;
         _beatmapKey = beatmapKey;
         _timeTweeningManager = timeTweeningManager;
-
-        INVOKE_CTOR();
     }
 
     void ChartView::Initialize()
     {
         INFO("Initializing graph");
+        DEBUG("BeatmapKey valid: {}", _beatmapKey.IsValid());
 
         bool is360Level = _beatmapKey.beatmapCharacteristic->requires360Movement;
         Vector3 pos = is360Level ? getModConfig().nonStandardLevelPosition.GetValue() : getModConfig().standardLevelPosition.GetValue();

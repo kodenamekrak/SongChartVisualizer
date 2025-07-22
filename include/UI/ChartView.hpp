@@ -51,7 +51,8 @@ DECLARE_CLASS_CODEGEN_INTERFACES(SongChartVisualizer, ChartView, System::Object,
     DECLARE_OVERRIDE_METHOD_MATCH(void, Initialize, &Zenject::IInitializable::Initialize);
     DECLARE_OVERRIDE_METHOD_MATCH(void, Tick, &Zenject::ITickable::Tick);
 
-    DECLARE_CTOR(ctor, GlobalNamespace::AudioTimeSyncController* audioTimeSyncController, GlobalNamespace::IReadonlyBeatmapData* readonlyBeatmapData, GlobalNamespace::BeatmapKey beatmapKey, Tweening::TimeTweeningManager* timeTweeningManager);
+    DECLARE_INJECT_METHOD(void, Inject, GlobalNamespace::AudioTimeSyncController* audioTimeSyncController, GlobalNamespace::IReadonlyBeatmapData* readonlyBeatmapData, GlobalNamespace::BeatmapKey beatmapKey, Tweening::TimeTweeningManager* timeTweeningManager);
+    DECLARE_DEFAULT_CTOR();
 
     std::vector<NpsInfo> _npsSections;
     NpsInfo _currentSection;

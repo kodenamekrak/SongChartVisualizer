@@ -79,7 +79,7 @@
       },
       {
         "id": "bs-cordl",
-        "versionRange": "^4007.0.0",
+        "versionRange": "^4008.0.0",
         "additionalData": {}
       },
       {
@@ -117,22 +117,23 @@
     },
     {
       "dependency": {
-        "id": "sombrero",
-        "versionRange": "=0.1.43",
+        "id": "rapidjson-macros",
+        "versionRange": "=2.1.0",
         "additionalData": {
           "headersOnly": true,
-          "branchName": "version/v0_1_43"
+          "branchName": "version/v2_1_0",
+          "cmake": false
         }
       },
-      "version": "0.1.43"
+      "version": "2.1.0"
     },
     {
       "dependency": {
         "id": "bs-cordl",
-        "versionRange": "=4007.0.0",
+        "versionRange": "=4008.0.0",
         "additionalData": {
           "headersOnly": true,
-          "branchName": "version/v4007_0_0",
+          "branchName": "version/v4008_0_0",
           "compileOptions": {
             "includePaths": [
               "include"
@@ -148,22 +149,7 @@
           }
         }
       },
-      "version": "4007.0.0"
-    },
-    {
-      "dependency": {
-        "id": "lapiz",
-        "versionRange": "=0.2.22",
-        "additionalData": {
-          "soLink": "https://github.com/raineaeternal/Lapiz/releases/download/v0.2.22/liblapiz.so",
-          "debugSoLink": "https://github.com/raineaeternal/Lapiz/releases/download/v0.2.22/debug_liblapiz.so",
-          "overrideSoName": "liblapiz.so",
-          "modLink": "https://github.com/raineaeternal/Lapiz/releases/download/v0.2.22/Lapiz.qmod",
-          "branchName": "version/v0_2_22",
-          "cmake": true
-        }
-      },
-      "version": "0.2.22"
+      "version": "4008.0.0"
     },
     {
       "dependency": {
@@ -186,6 +172,32 @@
     },
     {
       "dependency": {
+        "id": "lapiz",
+        "versionRange": "=0.2.23",
+        "additionalData": {
+          "soLink": "https://github.com/raineaeternal/Lapiz/releases/download/v0.2.23/liblapiz.so",
+          "debugSoLink": "https://github.com/raineaeternal/Lapiz/releases/download/v0.2.23/debug_liblapiz.so",
+          "overrideSoName": "liblapiz.so",
+          "modLink": "https://github.com/raineaeternal/Lapiz/releases/download/v0.2.23/Lapiz.qmod",
+          "branchName": "version/v0_2_23",
+          "cmake": true
+        }
+      },
+      "version": "0.2.23"
+    },
+    {
+      "dependency": {
+        "id": "sombrero",
+        "versionRange": "=0.1.43",
+        "additionalData": {
+          "headersOnly": true,
+          "branchName": "version/v0_1_43"
+        }
+      },
+      "version": "0.1.43"
+    },
+    {
+      "dependency": {
         "id": "tinyxml2",
         "versionRange": "=10.0.0",
         "additionalData": {
@@ -198,18 +210,6 @@
         }
       },
       "version": "10.0.0"
-    },
-    {
-      "dependency": {
-        "id": "rapidjson-macros",
-        "versionRange": "=2.1.0",
-        "additionalData": {
-          "headersOnly": true,
-          "branchName": "version/v2_1_0",
-          "cmake": false
-        }
-      },
-      "version": "2.1.0"
     },
     {
       "dependency": {
@@ -267,17 +267,17 @@
     {
       "dependency": {
         "id": "bsml",
-        "versionRange": "=0.4.54",
+        "versionRange": "=0.4.55",
         "additionalData": {
-          "soLink": "https://github.com/bsq-ports/Quest-BSML/releases/download/v0.4.54/libbsml.so",
-          "debugSoLink": "https://github.com/bsq-ports/Quest-BSML/releases/download/v0.4.54/debug_libbsml.so",
+          "soLink": "https://github.com/bsq-ports/Quest-BSML/releases/download/v0.4.55/libbsml.so",
+          "debugSoLink": "https://github.com/bsq-ports/Quest-BSML/releases/download/v0.4.55/debug_libbsml.so",
           "overrideSoName": "libbsml.so",
-          "modLink": "https://github.com/bsq-ports/Quest-BSML/releases/download/v0.4.54/BSML.qmod",
-          "branchName": "version/v0_4_54",
+          "modLink": "https://github.com/bsq-ports/Quest-BSML/releases/download/v0.4.55/BSML.qmod",
+          "branchName": "version/v0_4_55",
           "cmake": true
         }
       },
-      "version": "0.4.54"
+      "version": "0.4.55"
     },
     {
       "dependency": {
